@@ -106,10 +106,15 @@ output {
 
 .pip {
   color: #ff5ea8;
+  width: 22px;
+  clip-Path: polygon(50% 0, 100% 100%, 0 100%);
+  background: currentColor;
 }
 
 .cell {
   color: var(--highlight-glow-color);
+  flex: 1;
+  border-radius: 2px;
 }
 
 .pip.lit,
