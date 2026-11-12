@@ -6,6 +6,16 @@
   --main-score-color: #5ef2ff;
   --banner-color: #e8fdff;
   --pause-text-color: #6f86a8;
+  --strong-font: Orbitron, "Trebuchet MS", sans-serif;
+  --shadow-glow: 0 0 6px currentColor, 0 0 18px currentColor;
+  --panel-dark: 94, 242, 255;
+  --background-color: 14, 10, 34;
+  --side-panel-x: 18px;
+  --side-panel-y: 24deg;
+  --screen-radius: 10px;
+  --panel-gap: 14px;
+  --banner-gap: 6px;
+  --route-stop-gap: 10px;
 }
 
 * {
@@ -17,7 +27,7 @@ body {
   min-height: 100vh;
   display: grid;
   place-content: center;
-  gap: 14px;
+  gap: var(--panel-gap);
   background: radial-gradient(ellipse at 50% 30%, #1a0f3a, #04020c 70%);
   color: var(--banner-color);
   font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
@@ -34,26 +44,24 @@ body {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 14px;
+  gap: var(--panel-gap);
   padding: 14px;
-  border: 1px solid rgba(94, 242, 255, 0.35);
-  border-radius: 10px;
-  background: rgba(14, 10, 34, 0.86);
-  box-shadow: 0 0 24px rgba(94, 242, 255, 0.15), inset 0 0 18px rgba(94, 242,
-    255, 0.08);
+  border: 1px solid rgba(var(--panel-dark), 0.35);
+  border-radius: var(--screen-radius);
+  background: rgba(var(--background-color), 0.86);
+  box-shadow: 0 0 24px rgba(var(--panel-dark), 0.15), inset 0 0 18px rgba(var(--panel-dark), 0.08);
   transition: opacity 400ms, transform 400ms;
 }
 
 /* Each panel swings toward the screen and slightly overlaps its edge. */
 .panel-left {
   transform-origin: right center;
-  transform: translateX(18px) rotateY(24deg);
+  transform: translateX(var(--side-panel-x)) rotateY(var(--side-panel-y));
 }
 
 .panel-right {
   transform-origin: left center;
-  transform: translateX(-18px) rotateY(calc(-1 *
-    24deg));
+  transform: translateX(calc(-1 * var(--side-panel-x))), rotateY(calc(-1 * var(--side-panel-y)));
 }
 
 .cabinet[data-mode="title"] .panel,
@@ -63,7 +71,7 @@ body {
 
 h2 {
   margin: 0 0 4px;
-  font: 600 11px/1 Orbitron, "Trebuchet MS", sans-serif;
+  font: 600 11px/1 var(--strong-font);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--pause-text-color);
@@ -72,7 +80,7 @@ h2 {
 output {
   font-size: 22px;
   color: var(--main-score-color);
-  text-shadow: 0 0 6px currentColor, 0 0 18px currentColor;
+  text-shadow: var(--shadow-glow);
 }
 
 #best {
@@ -105,7 +113,7 @@ output {
 .pip.lit,
 .cell.lit {
   opacity: 1;
-  box-shadow: 0 0 6px currentColor, 0 0 18px currentColor;
+  box-shadow: var(--shadow-glow);
 }
 
 .cell.lit {
@@ -117,10 +125,10 @@ output {
   margin: 0;
   padding: 4px 8px;
   border: 1px solid var(--highlight-glow-color);
-  border-radius: 10px;
+  border-radius: var(--screen-radius);
   color: var(--highlight-glow-color);
   text-align: center;
-  font: 600 11px/1.4 Orbitron, "Trebuchet MS", sans-serif;
+  font: 600 11px/1.4 var(--strong-font);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   animation: blink 1.2s steps(2) infinite;
@@ -134,10 +142,9 @@ output {
   position: relative;
   width: 480px;
   height: 640px;
-  border-radius: 10px;
+  border-radius: var(--screen-radius);
   overflow: hidden;
-  box-shadow: 0 0 0 2px rgba(94, 242, 255, 0.35), 0 0 40px rgba(94, 242, 255,
-    0.2);
+  box-shadow: 0 0 0 2px rgba(var(--panel-dark), 0.35), 0 0 40px rgba(var(--panel-dark), 0.2);
 }
 
 #game,
@@ -152,13 +159,13 @@ output {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: var(--route-stop-gap);
 }
 
 .stop {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--route-stop-gap);
   font-size: 12px;
   color: var(--pause-text-color);
 }
@@ -173,7 +180,7 @@ output {
 
 .stop[data-state="current"] {
   color: var(--highlight-glow-color);
-  text-shadow: 0 0 6px currentColor, 0 0 18px currentColor;
+  text-shadow: var(--shadow-glow);
 }
 
 .stop[data-state="current"] .stop-dot {
@@ -203,7 +210,7 @@ output {
   display: block;
   height: 100%;
   background: currentColor;
-  box-shadow: 0 0 6px currentColor, 0 0 18px currentColor;
+  box-shadow: var(--shadow-glow);
   transform-origin: left;
   transform: scaleX(var(--fill));
   transition: transform 120ms linear;
@@ -214,10 +221,10 @@ output {
   position: absolute;
   inset: 22% -6% auto;
   display: grid;
-  gap: 6px;
+  gap: var(--banner-gap);
   padding: 14px;
   text-align: center;
-  background: linear-gradient(90deg, transparent, rgba(14, 10, 34, 0.9) 20% 80%,
+  background: linear-gradient(90deg, transparent, rgba(var(--background-color), 0.9) 20% 80%,
     transparent);
   pointer-events: none;
   opacity: 0;
@@ -229,10 +236,10 @@ output {
 }
 
 .banner strong {
-  font: 700 26px/1.1 Orbitron, "Trebuchet MS", sans-serif;
+  font: 700 26px/1.1 var(--strong-font);
   letter-spacing: 0.12em;
   color: var(--highlight-glow-color);
-  text-shadow: 0 0 6px currentColor, 0 0 18px currentColor;
+  text-shadow: var(--shadow-glow);
 }
 
 .banner span {
@@ -321,7 +328,7 @@ output {
 
 @keyframes pulse {
   to {
-    box-shadow: 0 0 6px currentColor, 0 0 18px currentColor;
+    box-shadow: var(--shadow-glow);
     background: currentColor;
   }
 }
